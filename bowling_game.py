@@ -18,6 +18,13 @@ class BowlingGame:
         Args:
             pins: Number of pins knocked down in this roll
         """
+        if pins < 0 or pins > 10:
+            raise ValueError("Invalid number of pins: must be between 0 and 10.")
+        
+        if len(self.rolls) % 2 == 1:  # We are in the second roll of a frame
+            if self.rolls[-1] + pins > 10:
+                raise ValueError("Frame cannot have more than 10 pins.")
+
         self.rolls.append(pins)
         self.current_roll += 1
 
@@ -87,5 +94,7 @@ class BowlingGame:
 
         Returns:
             The value of the roll after the spare
-        """
+        """ 
+        
+        
         return self.rolls[frame_index + 2]
