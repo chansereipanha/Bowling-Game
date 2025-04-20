@@ -19,10 +19,13 @@ class BowlingGame:
             pins: Number of pins knocked down in this roll
         """
 
+<<<<<<< HEAD
         roll_count = len(self.rolls) # Count how many rolls we've made
         frame = 0 # Counter for how many frames have been completed, which is different from frame_index which is used to find the starting position of frame.
         roll_index = 0 # This is a counter for self.roll list, so we know which roll we are at in the frame.
 
+=======
+>>>>>>> ab924cb21337488ba165c5baeb52f899c558b354
         
         while roll_index < roll_count: 
             if self.rolls[roll_index] == 10:  #This is so that if it's a strike roll_index will increase by 1
