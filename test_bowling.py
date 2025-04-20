@@ -85,6 +85,19 @@ class TestBowlingGame(unittest.TestCase):
         # Expected score: 66 (10+10+7+10+7+3+7+3+2+2+5+0*12)
         self.assertEqual(66, self.game.score())
     
+    def test_pin_count(self):
+        """Test to check if there's an invalid pin count"""
+        with self.assertRaises(ValueError):
+            self.game.roll(-1)
+    
+    def test_total_pins_in_one_frame(self):
+        """Test to check if you can get more than 10 points in a frame without a strike or a spare"""
+        with self.assertRaises(ValueError) :
+            self.game.roll(7)
+            self.game.roll(8)
+    
+
+    
 
     
     # def test_all_ones(self):
