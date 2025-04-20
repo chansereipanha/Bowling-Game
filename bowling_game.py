@@ -18,20 +18,36 @@ class BowlingGame:
         Args:
             pins: Number of pins knocked down in this roll
         """
+
+        roll_count = len(self.rolls) # Count how many rolls we've made
+        frame = 0 # Counter for how many frames have been completed, which is different from frame_index which is used to find the starting position of frame.
+        roll_index = 0 # This is a counter for self.roll list, so we know which roll we are at in the frame.
+
         
-        if len(self.rolls) % 2 == 1:  #Check to make sure we're in the second roll of a frame because that's where we determine if the total pins knocked for that frame exceeds 10 or not
-            if self.rolls[-1] + pins > 10: #self.rolls[-1] is to locate the pins knocked down on the first roll. Therefore, this checks whether the addition of the first roll and second roll exceeds 10 pins
-                raise ValueError("Frame cannot have more than 10 pins.") #Error message if they do exceed 10 pins
+        while roll_index < roll_count: 
+            if self.rolls[roll_index] == 10:  #This is so that if it's a strike roll_index will increase by 1
+                roll_index += 1
+            else:
+                roll_index += 2 # This is for a normal frame where it will take 2 rolls
+            frame += 1
+
+        # Validation: Only apply this check for non-strike frames and before 10th frame
+        if frame < 10:
+            if roll_count > 0:
+                # If previous roll was not a strike and part of the same frame
+                if self.rolls[-1] != 10 and (roll_count - roll_index) % 2 == 1:
+                    if self.rolls[-1] + pins > 10:
+                        raise ValueError("Frame cannot have more than 10 pins.")
 
         self.rolls.append(pins)
-        self.current_roll += 1
+
 
     def score(self):
         """Calculate the score for the current game."""
         score = 0
         frame_index = 0
 
-        for frame in range(10): #Originally rang(9) which is wrong because there are 10 frames
+        for frames in range(10): #Originally rang(9) which is wrong because there are 10 frames
             if self._is_strike(frame_index):
                 # Strike
                 score += 10 + self._strike_bonus(frame_index)
