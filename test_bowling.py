@@ -96,7 +96,13 @@ class TestBowlingGame(unittest.TestCase):
             self.game.roll(7)
             self.game.roll(8)
     
-
+    def test_exceeding_two_balls_before_10th_frame(self):
+        """Testing to check if frame can exceed two balls in a frame before the 10th frame without scoring a strike or spare"""
+        self.game.roll(3)
+        self.game.roll(6)
+        with self.assertRaises(Exception): 
+        # The first and second rolls add to 9 and with this last piece of code it will add a third roll which is wrong. This test is to check what happens when a third roll is added without a strike or spare. If there's a error message then there's no validation added yet to cover this.
+            self.game.roll(2) 
     
 
     
