@@ -72,6 +72,12 @@ class TestBowlingGame(unittest.TestCase):
         self.game.roll(5) #Bonus rolls
         # Expected score: 150 [(5+5+5)*10], 5 points scored from one roll, another 5 from the second which makes it a spare, add another 5 score as the bonus from the roll on the next frame, multiply by 10 for the amount of frames played.
         self.assertEqual(150, self.game.score())
+        
+    def test_all_ones(self):
+        """Test a game where one pin is knocked down on each roll."""
+        self.roll_many(20, 1)   
+        # Expected score: 20 (1 pin × 20 rolls)
+        self.assertEqual(20, self.game.score())
 
     def test_multiple_strike(self):
         """Test a game where you roll multiple strikes"""
@@ -96,14 +102,6 @@ class TestBowlingGame(unittest.TestCase):
             self.game.roll(7)
             self.game.roll(8)
 
-    
-
-    
-    # def test_all_ones(self):
-    #     """Test a game where one pin is knocked down on each roll."""
-    #     self.roll_many(20, 1)   
-    #     # Expected score: 20 (1 pin × 20 rolls)
-    #     self.assertEqual(20, self.game.score())
 
 
 if __name__ == "__main__":
