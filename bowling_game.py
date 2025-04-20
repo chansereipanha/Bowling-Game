@@ -26,7 +26,7 @@ class BowlingGame:
         score = 0
         frame_index = 0
 
-        for frame in range(10):
+        for frame in range(10): #Originally rang(9) which is wrong because there are 10 frames
             if self._is_strike(frame_index):
                 # Strike
                 score += 10 + self._strike_bonus(frame_index)
@@ -37,7 +37,7 @@ class BowlingGame:
                 frame_index += 2
             else:
                 # Open frame
-                score += self.rolls[frame_index] + self.rolls[frame_index + 1]
+                score += self.rolls[frame_index] + self.rolls[frame_index + 1] #Originally it is score += self.rolls[frame_index] but is needed self.rolls[frame_index + 1] because in an open frame there's 2 rolls but the original code only counts the first roll therefore the change made it so that you will add the second roll as well when it's an open frame.
                 frame_index += 2
 
         return score
