@@ -56,7 +56,7 @@ class TestBowlingGame(unittest.TestCase):
     def test_perfect_game(self):
         """Test a perfect game, where you roll all strike"""
         self.roll_many(12,10) #You get extra rolls on the 10th frame
-        # Expected score: 300 (10*10*3) 10 for the strike, another 10 for the amount of frames, 3 for the amount of rolls in each framess
+        # Expected score: 300 (10*10*3) 10 for the strike, another 10 for the amount of frames, 3 for the amount of rolls in each frames
         self.assertEqual(300, self.game.score())
         
     def test_gutter_game(self):
@@ -75,15 +75,15 @@ class TestBowlingGame(unittest.TestCase):
 
     def test_multiple_strike(self):
         """Test a game where you roll multiple strikes"""
-        self.roll_strike()  # 10
-        self.roll_strike()  # 10
+        self.roll_strike()  
+        self.roll_strike()  
         self.game.roll(7)
-        self.game.roll(8)
+        self.game.roll(3) # Using the validation tells us that this roll which was originally 8 would up up to be over 10. Therefore, we're dropping it down to 3 making the third frame a spare.
         self.game.roll(2)
         self.game.roll(5)
         self.roll_many(12, 0)
-        # Expected score: 74 (10+10+7+10+7+8+7+8+2+5+0*12) This results show that frame 3 has an error where a frame exceeds 10 pins in a frame therefore the code needs to be have error handling
-        self.assertEqual(74, self.game.score())
+        # Expected score: 66 (10+10+7+10+7+3+7+3+2+2+5+0*12)
+        self.assertEqual(66, self.game.score())
     
 
     
