@@ -1,6 +1,20 @@
 """
 Bowling Game Implementation
 A module for calculating bowling game scores.
+
+Classes:
+    BowlingGame 
+
+Functions:
+    __init__(): Initialize a new game.
+    roll( , pins): Records the rolls in the game.
+    score(): Score calculation.
+    _is_strike(): Check if the roll is a strike.
+    _is_spare(): Check if the first and second roll added makes a spare.
+    _strike_bonus(): Calculate the bonus when you got a strike.
+    _spare_bonus(): Calculate the bonus when you get a spare.
+    
+
 """ 
 
 
@@ -50,11 +64,16 @@ class BowlingGame:
 
 
     def score(self):
-        """Calculate the score for the current game."""
+        """
+        Calculate the score for the current game.
+        
+        Returns:
+            Score calculation according to rules.
+        """
         score = 0
         frame_index = 0
 
-        for frames in range(10): #Originally rang(9) which is wrong because there are 10 frames
+        for frames in range(10): #Originally range(9) which is wrong because there are 10 frames
             if self._is_strike(frame_index):
                 # Strike
                 score += 10 + self._strike_bonus(frame_index)
@@ -79,18 +98,20 @@ class BowlingGame:
 
         Returns:
             True if the roll is a strike, False otherwise
+            
         """
         return frame_index < len(self.rolls) and self.rolls[frame_index] == 10
 
     def _is_spare(self, frame_index):
         """
-        Check if the rolls at frame_index and frame_index + 1 form a spare.
+        Check if the rolls at frame_index(first roll) and frame_index + 1(second roll) form a spare.
 
         Args:
             frame_index: Index of the first roll in a frame
 
         Returns:
             True if the rolls form a spare, False otherwise
+            
         """
         return frame_index + 1 < len(self.rolls) and self.rolls[frame_index] + self.rolls[frame_index + 1] == 10
 
@@ -103,6 +124,7 @@ class BowlingGame:
 
         Returns:
             The value of the next two rolls after the strike
+            
         """
         return self.rolls[frame_index + 1] + self.rolls[frame_index + 2]
 
@@ -115,6 +137,7 @@ class BowlingGame:
 
         Returns:
             The value of the roll after the spare
+            
         """ 
         
         

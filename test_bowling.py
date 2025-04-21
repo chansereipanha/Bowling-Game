@@ -3,7 +3,32 @@ Unit tests for the Bowling Game
 
 This module contains basic unit tests for the BowlingGame class.
 Students should expand these tests to cover all functionality and edge cases.
+
+Classes:
+    TestBowlingGame -- Contains all unit tests for the BowlingGame class.
+
+Functions:
+    setUp() -- Initializes a new BowlingGame instance before each test.
+    roll_many(n, pins) -- Helper method to roll n times with amount of pins knocked down each time.
+    roll_strike() -- Helper method to roll a strike, 10 pins.
+    test_open_frame_score_calculation() -- Test scoring with open frames.
+    test_spare_score_calculation() -- Test scoring with a spare.
+    test_strike_score_calculation() -- Test scoring with a strike.
+    test_perfect_game() -- Test scoring of a perfect game.
+    test_gutter_game() -- Test scoring when no pins are knocked down.
+    test_all_spares() -- Test scoring when all frames are spares.
+    test_all_ones() -- Test scoring when only one pin is knocked down every roll.
+    test_multiple_strike() -- Test scoring with consecutive strikes.
+    test_pin_count() -- Test validation of invalid negative pin count.
+    test_total_pins_in_one_frame() -- Test validation for frame pin total exceeding 10 without strike.
+
+Usage:
+    Run this module directly to execute all tests.
+    Example:
+        python test_bowling_game.py
+
 """
+
 
 import unittest
 from bowling_game import BowlingGame
@@ -15,7 +40,13 @@ class TestBowlingGame(unittest.TestCase):
         self.game = BowlingGame()
 
     def roll_many(self, n, pins):
-        """Helper to roll the same number of pins multiple times."""
+        """
+        Helper to roll the same number of pins multiple times.
+        
+        Args:
+            n (int): Number of rolls.
+            pins (int): Number of pins knocked down in each roll.
+        """
         for roll in range(n):
             self.game.roll(pins)    
             
