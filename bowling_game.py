@@ -10,6 +10,7 @@ class BowlingGame:
         # Each frame has up to 2 rolls (except the 10th frame which can have 3)
         self.rolls = []
         self.current_roll = 0
+    
 
     def roll(self, pins):
         """
@@ -18,8 +19,10 @@ class BowlingGame:
         Args:
             pins: Number of pins knocked down in this roll
         """
+        MAX_PINS = 10
+        MAX_FRAMES = 10
         
-        if pins < 0 or pins > 10:
+        if pins < 0 or pins > MAX_PINS:
             raise ValueError("Invalid number of pins: must be between 0 and 10.")
 
         roll_count = len(self.rolls) # Count how many rolls we've made
@@ -28,18 +31,19 @@ class BowlingGame:
 
         
         while roll_index < roll_count: 
-            if self.rolls[roll_index] == 10:  #This is so that if it's a strike roll_index will increase by 1
+            if self.rolls[roll_index] == MAX_PINS:  #This is so that if it's a strike roll_index will increase by 1
                 roll_index += 1
             else:
                 roll_index += 2 # This is for a normal frame where it will take 2 rolls
             frame += 1
-
+            
+        
         # Validation: Only apply this check for non-strike frames and before 10th frame
-        if frame < 10:
+        if frame < MAX_FRAMES:
             if roll_count > 0:
                 # If previous roll was not a strike and part of the same frame
-                if self.rolls[-1] != 10 and (roll_count - roll_index) % 2 == 1:
-                    if self.rolls[-1] + pins > 10:
+                if self.rolls[-1] != MAX_FRAMES and (roll_count - roll_index) % 2 == 1:
+                    if self.rolls[-1] + pins > MAX_PINS:
                         raise ValueError("Frame cannot have more than 10 pins.")
 
         self.rolls.append(pins)

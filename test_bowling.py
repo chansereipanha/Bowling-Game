@@ -80,7 +80,7 @@ class TestBowlingGame(unittest.TestCase):
         self.assertEqual(20, self.game.score())
 
     def test_multiple_strike(self):
-        """Test a game where you roll multiple strikes"""
+        """Test a game where you roll multiple strikes in a row"""
         self.roll_strike()  
         self.roll_strike()  
         self.game.roll(7)
